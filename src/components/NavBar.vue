@@ -5,16 +5,38 @@
       <span class="font-weight-regular">Blog</span>
     </v-toolbar-title>
 
-<v-spacer />
+    <v-spacer />
     <v-btn v-if="!user" to="/login" text>
       <span class="mr-2">Login</span>
     </v-btn>
-    </v-app-bar>
+    <div v-else>
+      <v-menu bottom left>
+        <template v-slot:activator="{ on }">
+          <v-btn text v-on="on">
+            <span class="mr-2">{{ user.name }}</span>
+            <v-icon>mdi-menu-down</v-icon>
+          </v-btn>
+        </template>
+
+        <v-list>
+          <v-list-item>
+            <v-list-item-title>
+              <v-btn block text @click="showDialog()">Add Post</v-btn>
+            </v-list-item-title>
+          </v-list-item>
+          <v-list-item>
+            <v-list-item-title>
+              <v-btn block text @click="logOut">Logout</v-btn>
+            </v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+    </div>
+  </v-app-bar>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
- 
 export default {
   name: 'NavBar',
   computed: {
@@ -30,6 +52,6 @@ export default {
       this.$router.push('/')
     },
     ...mapActions(['setUser', 'setIdToken', 'showDialog']),
-  }
+  },
 }
 </script>
