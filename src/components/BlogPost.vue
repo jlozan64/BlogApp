@@ -20,10 +20,10 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import EditDialog from '@/components/EditDialog.vue'
+import { mapGetters } from "vuex"
+import EditDialog from "@/components/EditDialog.vue"
 export default {
-  name: 'BlogPost',
+  name: "BlogPost",
   components: {
     EditDialog,
   },
@@ -40,13 +40,13 @@ export default {
   },
   computed: {
     ...mapGetters({
-      user: 'getUser',
+      user: "getUser",
     }),
   },
   methods: {
     async deletePost(id) {
       await this.$axios.delete(`api/posts/${id}`)
-      this.$emit('deleted')
+      this.$emit("deleted")
     },
     showEditDialog() {
       this.openEdit = true
@@ -56,7 +56,7 @@ export default {
     },
     edited() {
       this.hideEditDialog()
-      this.$emit('edited')
+      this.$emit("edited")
     },
   },
 }
