@@ -20,26 +20,26 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions } from "vuex"
 export default {
-  name: 'Dialog',
+  name: "Dialog",
   data() {
     return {
       valid: true,
-      title: '',
-      titleRules: [v => !!v || 'Title is required', v => (v && v.length <= 30) || 'Title must be less than 30 characters'],
+      title: "",
+      titleRules: [v => !!v || "Title is required", v => (v && v.length <= 30) || "Title must be less than 30 characters"],
       content: '',
-      contentRules: [v => !!v || 'Content is required'],
+      contentRules: [v => !!v || "Content is required"],
     }
   },
   computed: {
-    ...mapGetters(['openDialog', 'getUser']),
+    ...mapGetters(["openDialog", "getUser"]),
   },
   methods: {
     async add() {
       await this.$refs.form.validate()
       if (this.valid) {
-        await this.$axios.post('api/posts', {
+        await this.$axios.post("api/posts", {
           post: {
             title: this.title,
             text: this.content,
@@ -47,7 +47,7 @@ export default {
           },
         })
         await this.$refs.form.reset()
-        this.$emit('added')
+        this.$emit("added")
         this.hideDialog()
       }
     },
@@ -55,7 +55,7 @@ export default {
       await this.$refs.form.reset()
       this.hideDialog()
     },
-    ...mapActions(['hideDialog']),
+    ...mapActions(["hideDialog"]),
   },
 }
 </script>

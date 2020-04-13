@@ -20,9 +20,9 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from "vuex"
 export default {
-  name: 'EditDialog',
+  name: "EditDialog",
   props: {
     post: {
       type: Object,
@@ -37,13 +37,13 @@ export default {
     return {
       valid: true,
       title: '',
-      titleRules: [v => !!v || 'Title is required', v => (v && v.length <= 30) || 'Title must be less than 30 characters'],
+      titleRules: [v => !!v || "Title is required", v => (v && v.length <= 30) || "Title must be less than 30 characters"],
       content: '',
-      contentRules: [v => !!v || 'Content is required'],
+      contentRules: [v => !!v || "Content is required"],
     }
   },
   computed: {
-    ...mapGetters(['openEditDialog', 'getUser']),
+    ...mapGetters(["openEditDialog", "getUser"]),
   },
   mounted() {
     this.reset()
@@ -59,12 +59,12 @@ export default {
             author: this.getUser.id.toString(),
           },
         })
-        this.$emit('edited')
+        this.$emit("edited")
       }
     },
     async cancel() {
       await this.reset()
-      this.$emit('cancel')
+      this.$emit("cancel")
     },
     reset() {
       this.title = this.post.title
